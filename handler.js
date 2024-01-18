@@ -1180,11 +1180,11 @@ export async function handler(chatUpdate) {
               const messageNumber = user.bannedMessageCount + 1;
 const messageText = `
 ╔═════════════════════╗
- ❰ ⚠️ ❱ *¡USUARIO BANEADO!* ❰ ⚠️ ❱
-—◉ *Aviso ${messageNumber}/3 (Total: 3)*
-—◉ ${user.bannedReason ? `\n*Motivo:* ${user.bannedReason}` : '*Motivo:* Sin especificar'}
-—◉ *Si consideras que esto es un error y cuentas con pruebas, puedes comunicarte con el propietario del Bot para apelar la suspensión.*
-—◉ *Contacto para apelaciones:* wa.me/5219992095479
+ ❰ ⚠️ ❱ *¡مستخدم محظور!* ❰ ⚠️ ❱
+—◉ *تحذير ${messageNumber}/3 (مجموع: 3)*
+—◉ ${user.bannedReason ? `\n*سبب:* ${user.bannedReason}` : '*سبب:* غير محدد'}
+—◉ *إذا كنت تعتقد أن هذا خطأ ولديك دليل، فيمكنك الاتصال بمالك الروبوت لاستئناف التعليق.*
+ —◉ * جهة الاتصال للاستئنافات:* https://wa.me/963959649663
 ╚═════════════════════╝
                `.trim();
               m.reply(messageText);
@@ -1201,7 +1201,7 @@ const messageText = `
             if (user.commandCount === 2) {
               const remainingTime = Math.ceil((user.lastCommandTime + 5000 - Date.now()) / 1000);
               if (remainingTime > 0) {
-                const messageText = `*[ ⚠ ] Espera ${remainingTime} segundos antes de usar otro comando*`;
+                const messageText = `*[ ⚠ ] انتظر ${remainingTime} ثواني قبل استخدام أمر آخر*`;
                 m.reply(messageText);
                 return;
               } else {
@@ -1267,11 +1267,11 @@ const messageText = `
           m.exp += xp;
         }
         if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-          mconn.conn.reply(m.chat, `*[ 💎 ] Sus diamantes (limites) se han agotado, puede adquirir más con el comando ${usedPrefix}buyall*`, m);
+          mconn.conn.reply(m.chat, `*[ 💎 ] لقد تم استنفاد الالماس الخاص بك، يمكنك شراء المزيد باستخدام الأمر ${usedPrefix}شراء*`, m);
           continue; 
         }
         if (plugin.level > _user.level) {
-          mconn.conn.reply(m.chat, `*[ 💠 ] Se require tener el nivel ${plugin.level} para poder usar esté comando. Tú nivel actual es ${_user.level}, usa el comando ${usedPrefix}lvl para subir tu nivel con exp.*`, m);
+          mconn.conn.reply(m.chat, `*[ 💠 ] ويشترط أن يكون المستوى ${plugin.level} لتتمكن من استخدام هذا الأمر. مستواك الحالي هو ${_user.level}, استخدم الأمر ${usedPrefix} لرفع مستواك مع exp.*`, m);
           continue; 
         }
         const extra = {
@@ -1340,7 +1340,7 @@ const messageText = `
             }
           }
           if (m.limit) {
-            m.reply('*[ 💎 ] Se utilizarón ' + +m.limit + ' diamante(s) (limites).*');
+            m.reply('*[ 💎 ] تم استخدام ' + +m.limit + ' الماس .*');
           }
         }
         break;
@@ -1441,7 +1441,7 @@ export async function participantsUpdate({id, participants, action}) {
               const responseb = await m.conn.groupParticipantsUpdate(id, [user], 'remove');
               if (responseb[0].status === '404') return;
               const fkontak2 = {'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${user.split('@')[0]}:${user.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
-              await m.conn.sendMessage(id, {text: `*[❗] @${user.split('@')[0]} ᴇɴ ᴇsᴛᴇ ɢʀᴜᴘᴏ ɴᴏ sᴇ ᴘᴇʀᴍɪᴛᴇɴ ɴᴜᴍᴇʀᴏs ᴀʀᴀʙᴇs ᴏ ʀᴀʀᴏs, ᴘᴏʀ ʟᴏ ϙᴜᴇ sᴇ ᴛᴇ sᴀᴄᴀʀᴀ ᴅᴇʟ ɢʀᴜᴘᴏ*`, mentions: [user]}, {quoted: fkontak2});
+              await m.conn.sendMessage(id, {text: `*[❗] @${user.split('@')[0]} الأرقام العربية أو النادرة غير مسموح بها في هذه المجموعة، لذا سيتم إزالتك من المجموعة.*`, mentions: [user]}, {quoted: fkontak2});
               return;
             }
             await m.conn.sendFile(id, apii.data, 'pp.jpg', text, null, false, {mentions: [user]});
@@ -1482,10 +1482,10 @@ export async function groupsUpdate(groupsUpdate) {
     if (groupUpdate.subjectTime) continue;
     const chats = global.db.data.chats[id]; let text = '';
     if (!chats?.detect) continue;
-    if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```Description has been changed to```\n@desc').replace('@desc', groupUpdate.desc);
-    if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '```Subject has been changed to```\n@subject').replace('@subject', groupUpdate.subject);
-    if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '```Icon has been changed to```').replace('@icon', groupUpdate.icon);
-    if (groupUpdate.revoke) text = (chats.sRevoke || this.sRevoke || conn.sRevoke || '```Group link has been changed to```\n@revoke').replace('@revoke', groupUpdate.revoke);
+    if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```تم تغيير الوصف لي```\n@desc').replace('@desc', groupUpdate.desc);
+    if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '```تم تغير اسم المجموعة الاسم الجديد```\n@subject').replace('@subject', groupUpdate.subject);
+    if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '```تم تغير صورة المجموعة```').replace('@icon', groupUpdate.icon);
+    if (groupUpdate.revoke) text = (chats.sRevoke || this.sRevoke || conn.sRevoke || '```تمت اعادة تعيين رابط المجموعة لي```\n@revoke').replace('@revoke', groupUpdate.revoke);
     if (!text) continue;
     await mconn.conn.sendMessage(id, {text, mentions: mconn.conn.parseMention(text)});
   }
@@ -1497,7 +1497,7 @@ export async function callUpdate(callUpdate) {
   for (const nk of callUpdate) {
     if (nk.isGroup == false) {
       if (nk.status == 'offer') {
-        const callmsg = await mconn.conn.reply(nk.from, `Hola *@${nk.from.split('@')[0]}*, las ${nk.isVideo ? 'videollamadas' : 'llamadas'} no están permitidas, serás bloqueado.\n-\nSi accidentalmente llamaste póngase en contacto con mi creador para que te desbloquee!`, false, {mentions: [nk.from]});
+        const callmsg = await mconn.conn.reply(nk.from, `مرحبا *@${nk.from.split('@')[0]}*, ال ${nk.isVideo ? 'مكالمات فيديو' : 'llamadas'} no están permitidas, serás bloqueado.\n-\nSi accidentalmente llamaste póngase en contacto con mi creador para que te desbloquee!`, false, {mentions: [nk.from]});
         // let data = global.owner.filter(([id, isCreator]) => id && isCreator)
         // await this.sendContact(nk.from, data.map(([id, name]) => [id, name]), false, { quoted: callmsg })
         const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑;;;\nFN:𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑\nORG:𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑\nTITLE:\nitem1.TEL;waid=5219992095479:+521 999 209 5479\nitem1.X-ABLabel:𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑\nX-WA-BIZ-DESCRIPTION:[❗] ᴄᴏɴᴛᴀᴄᴛᴀ ᴀ ᴇsᴛᴇ ɴᴜᴍ ᴘᴀʀᴀ ᴄᴏsᴀs ɪᴍᴘᴏʀᴛᴀɴᴛᴇs.\nX-WA-BIZ-NAME:𝐁𝐫𝐮𝐧𝐨 𝐒𝐨𝐛𝐫𝐢𝐧𝐨 👑\nEND:VCARD`;
@@ -1521,15 +1521,15 @@ let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'nu
         if (!msg) return 
 	if (!msg?.isGroup) return 
 	const antideleteMessage = `
-┏━━━━━━━━━⬣  𝘼𝙉𝙏𝙄 𝘿𝙀𝙇𝙀𝙏𝙀  ⬣━━━━━━━━━
-*■ Usuario:* @${participant.split`@`[0]}
-*■ Hora:* ${time}
-*■ Fecha:* ${date}
-*■ Enviando el mensaje eliminado...*
+┏━━━━━━━━━⬣  لحذف التلقائي  ⬣━━━━━━━━━
+*■ الاسم:* @${participant.split`@`[0]}
+*■ الساعة:* ${time}
+*■ التاريخ:* ${date}
+*■ إرسال الرسالة المحذوفة...*
     
-*■ Para desactivar esta función, escribe el comando:*
+*■ لتعطيل هذه الميزة، اكتب الأمر:*
 *—◉ #disable antidelete*
-┗━━━━━━━━━⬣  𝘼𝙉𝙏𝙄 𝘿𝙀𝙇𝙀𝙏𝙀  ⬣━━━━━━━━━`.trim();
+┗━━━━━━━━━⬣  لحذف التلقائي  ⬣━━━━━━━━━`.trim();
         await mconn.conn.sendMessage(msg.chat, {text: antideleteMessage, mentions: [participant]}, {quoted: msg})
         mconn.conn.copyNForward(msg.chat, msg).catch(e => console.log(e, msg))
     } catch (e) {
@@ -1539,19 +1539,19 @@ let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'nu
 
 global.dfail = (type, m, conn) => {
   const msg = {
-    rowner: '*[ ⚠️ ] Este comando solo puede ser utilizado por el/la propietario(a) (owner) del Bot.*',
-    owner: '*[ ⚠️ ] Este comando solo puede ser utilizado por el/la propietario(a) (owner) del Bot.*',
-    mods: '*[ ⚠️ ] Este comando solo puede ser utilizado por moderadores y el/la propietario(a) (owner) del Bot.*',
-    premium: '*[ ⚠️ ] Este comando solo puede ser utilizado por usarios premium y el/la propietario(a) (owner) del Bot.*',
-    group: '*[ ⚠️ ] Este comando solo puede ser utilizado en grupos.*',
-    private: '*[ ⚠️ ] Este comando solo puede ser utilizado en el chat privado del Bot.*',
-    admin: '*[ ⚠️ ] Este comando solo puede ser usado por admins del grupo.*',
-    botAdmin: '*[ ⚠️ ] Para poder usar este comando es necesario que yo sea admin.*',
-    unreg: '*[ 🛑 Hey!! Alto, no estas registrado 🛑 ]*\n\n*—◉ Para poder usar este comando debes registrarte, usa el comando:*\n*➣ #verificar nombre.edad*',
-    restrict: '*[ ⚠️ ] Este comando esta restringido/desactivado por desición del propietario(a) (owner) del Bot.*',
+    rowner: '*[ ⚠️ ] لا يمكن استخدام هذا الأمر إلا من قبل مطور البوت.*',
+    owner: '*[ ⚠️ ] لا يمكن استخدام هذا الأمر إلا من قبل مطور البوت.*',
+    mods: '*[ ⚠️ ] لا يمكن استخدام هذا الأمر إلا من قبل المشرفين و مطور البوت.*',
+    premium: '*[ ⚠️ ] لا يمكن استخدام هذا الأمر إلا من قبل المستخدمين المميزين و مطور البوت.*',
+    group: '*[ ⚠️ ] لا يمكن استخدام هذا الأمر إلا في مجموعات.*',
+    private: '*[ ⚠️ ] لا يمكن استخدام هذا الأمر إلا في الدردشة الخاصة للروبوت.*',
+    admin: '*[ ⚠️ ] لا يمكن استخدام هذا الأمر إلا من قبل مسؤولي المجموعة.*',
+    botAdmin: '*[ ⚠️ ] لكي أتمكن من استخدام هذا الأمر، من الضروري أن أكون مسؤولاً.*',
+    unreg: '*[ 🛑 مرحبا!! توقف، أنت غير مسجل 🛑 ]*\n\n*—◉ لتتمكن من استخدام هذا الأمر، يجب عليك التسجيل، استخدم الأمر:*\n*➣ #تسجيل الاسم.العمر*',
+    restrict: '*[ ⚠️ ] تم تقييد/تعطيل هذا الأمر بقرار من مطور البوت.*',
   }[type];
   const aa = {quoted: m, userJid: conn.user.jid};
-  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '[ ⚠ ] 𝐀𝐕𝐈𝐒𝐎 - 𝐀𝐋𝐄𝐑𝐓𝐀', body: 'ᴛʜᴇ ᴍʏsᴛɪᴄ - ʙᴏᴛ', thumbnail: imagen1, sourceUrl: 'https://github.com/BrunoSobrino/TheMystic-Bot-MD'}}}}, aa);
+  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '[ ⚠ ] تنبيه - اشعار', body: 'Gojo_Bots - ʙᴏᴛ', thumbnail: imagen1, sourceUrl: 'https://youtu.be/C3GouGa0noM?si=i2mqrK71hJ2yzCwH'}}}}, aa);
   if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id});
 };
 
