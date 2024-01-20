@@ -61,7 +61,9 @@ if (enviando) return;
        }
     }
 
-    const dataMessage = `*=>  *Publicado:* ${yt_play[0].ago}
+        const dataMessage = `*◉——⌈🔊 YOUTUBE PLAY 🔊⌋——◉*\n
+❏ 📌 *Titulo:* ${yt_play[0].title}
+❏ 📆 *Publicado:* ${yt_play[0].ago}
 ❏ ⌚ *Duracion:* ${secondString(yt_play[0].duration.seconds)}
 ❏ 👀 *Vistas:* ${`${MilesNumber(yt_play[0].views)}`}
 ❏ 👤 *Autor:* ${yt_play[0].author.name}
@@ -69,7 +71,7 @@ if (enviando) return;
 ❏ 🆔 *ID:* ${yt_play[0].videoId}
 ❏ 🪬 *Tipo:* ${yt_play[0].type}
 ❏ 🔗 *Link:* ${yt_play[0].url}\n
-❏ *_Enviando ${additionalText}, aguarde un momento．．．_*`.trim();${data.resultado.publicDate}`;
+❏ *_Enviando ${additionalText}, aguarde un momento．．．_*`.trim();
     await conn.sendMessage(m.chat, { text: dataMessage }, { quoted: m });
 
     if (buff) {
