@@ -27,15 +27,15 @@ if (enviando) return;
 
     if (!data.resultado || !data.resultado.url) {
       enviando = false;
-      throw `*[❗] تعذر لحصول عبى عنوان المقطع.*`;
+      throw `*[❗] تعذر لحصول على عنوان المقطع.*`;
     } else {
       try {
-        if (command === 'play') {
+        if (command === 'play.1') {
               apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp3?url=${data.resultado.url}`;
               mimeType = 'audio/mpeg';
               fileName = 'error.mp3';
               buff = await conn.getFile(apiUrl);
-            } else if (command === 'play2') {
+            } else if (command === 'play.2') {
               apiUrl = `https://api-brunosobrino.zipponodes.xyz/api/v1/ytmp4?url=${data.resultado.url}`;
               mimeType = 'video/mp4';
               fileName = 'error.mp4';
@@ -43,12 +43,12 @@ if (enviando) return;
         }
       } catch {
           try {
-            if (command === 'play') {
+            if (command === 'play.1') {
               apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp3?url=${data.resultado.url}`;
               mimeType = 'audio/mpeg';
               fileName = 'error.mp3';
               buff = await conn.getFile(apiUrl);
-            } else if (command === 'play2') {
+            } else if (command === 'play.2') {
               apiUrl = `https://api-brunosobrino.onrender.com/api/v1/ytmp4?url=${data.resultado.url}`;
               mimeType = 'video/mp4';
               fileName = 'error.mp4';
@@ -61,7 +61,15 @@ if (enviando) return;
        }
     }
 
-    const dataMessage = `*=> العنوان📜:* ${data.resultado.title}\n*=> القناة الناشرة📺:* ${data.resultado.channel}\n*=> الرابط:* ${data.resultado.url}\n*=> تاريخ لاصدار:* ${data.resultado.publicDate}`;
+    const dataMessage = `*=>  *Publicado:* ${yt_play[0].ago}
+❏ ⌚ *Duracion:* ${secondString(yt_play[0].duration.seconds)}
+❏ 👀 *Vistas:* ${`${MilesNumber(yt_play[0].views)}`}
+❏ 👤 *Autor:* ${yt_play[0].author.name}
+❏ ⏯️ *Canal:* ${yt_play[0].author.url}
+❏ 🆔 *ID:* ${yt_play[0].videoId}
+❏ 🪬 *Tipo:* ${yt_play[0].type}
+❏ 🔗 *Link:* ${yt_play[0].url}\n
+❏ *_Enviando ${additionalText}, aguarde un momento．．．_*`.trim();${data.resultado.publicDate}`;
     await conn.sendMessage(m.chat, { text: dataMessage }, { quoted: m });
 
     if (buff) {
@@ -78,7 +86,7 @@ if (enviando) return;
 };
 handler.help = ['play.1', 'play.2'].map((v) => v + ' <texto>');
 handler.tags = ['downloader'];
-handler.command = ['play', 'play2'];
+handler.command = ['play.1', 'play.2'];
 export default handler;
 
 
