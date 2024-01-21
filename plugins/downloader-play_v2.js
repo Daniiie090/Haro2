@@ -6,12 +6,12 @@ let fileName;
 let apiUrl;
 let enviando = false;
 const handler = async (m, { command, usedPrefix, conn, text }) => {
-  if (!text) throw `*[❗] اسم الأغنية/الفيديو المفقود، يرجى إدخال الأمر بالإضافة إلى اسم أو عنوان أو رابط الأغنية أو مقطع الفيديو على YouTube .*\n\n*—◉ مثال 1:*\n*${usedPrefix + command}* Tatto - Gods\n*—◉ مثال 2:*\n*${usedPrefix + command}* https://youtube.com/shorts/HQI9QpPVsXQ?si=eor_NrUv58EE2Ikf `;
+  if (!text) throw `_*< DESCARGAS - PLAY v2 />*_\n\n*[ ℹ️ ] Hace falta el título del video de YouTube.*\n\n*[ 💡 ] Ejemplo:* _${usedPrefix + command} Good Feeling - Flo Rida_\n\n*[ 💡 ] Ejemplo 2:* _${usedPrefix + command} https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p_`;
 if (enviando) return;
     enviando = true
   try {
     const apiUrls = [
-      `https://api-brunosobrino.zipponodes.xyz/api/ytplay?text=${text}`,
+      `https://api.cafirexos.com/api/ytplay?text=${text}`,
       `https://api-brunosobrino.onrender.com/api/ytplay?text=${text}`
     ];
 
@@ -27,7 +27,7 @@ if (enviando) return;
 
     if (!data.resultado || !data.resultado.url) {
       enviando = false;
-      throw `*[❗] تعذر لحصول على عنوان المقطع.*`;
+      throw `_*< DESCARGAS - PLAY V2 />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
     } else {
       try {
         if (command === 'play.1') {
@@ -56,20 +56,12 @@ if (enviando) return;
             }
           } catch {
             enviando = false;
-            throw `*[❗] حدث خطا اثناء التحميل.`;
+            throw `_*< DESCARGAS - PLAY V2 />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
           }
        }
     }
 
-    const dataMessage = `*=>  *Publicado:* ${yt_play[0].ago}
-❏ ⌚ *Duracion:* ${secondString(yt_play[0].duration.seconds)}
-❏ 👀 *Vistas:* ${`${MilesNumber(yt_play[0].views)}`}
-❏ 👤 *Autor:* ${yt_play[0].author.name}
-❏ ⏯️ *Canal:* ${yt_play[0].author.url}
-❏ 🆔 *ID:* ${yt_play[0].videoId}
-❏ 🪬 *Tipo:* ${yt_play[0].type}
-❏ 🔗 *Link:* ${yt_play[0].url}\n
-❏ *_Enviando ${additionalText}, aguarde un momento．．．_*`.trim();${data.resultado.publicDate}`;
+    const dataMessage = `_*< DESCARGAS - PLAY V2 />*_\n\n▢ *Título:* ${data.resultado.title}\n\n▢ *Publicado:* ${data.resultado.publicDate}\n\n▢ *Canal:* ${data.resultado.channel}\n\n▢ *Vídeo URL:* ${data.resultado.url}`;
     await conn.sendMessage(m.chat, { text: dataMessage }, { quoted: m });
 
     if (buff) {
@@ -77,15 +69,13 @@ if (enviando) return;
       enviando = false;
     } else {
       enviando = false;
-      throw `*[❗] حدق خطأ.`;
+      throw `_*< DESCARGAS - PLAY V2 />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
     }
   } catch (error) {
     enviando = false;
-    throw `*[❗] Error: ${error.message || 'Ocurrió un error inesperado'}.*`;
+    throw `_*< DESCARGAS - PLAY V2 />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
   }
 };
-handler.help = ['play.1', 'play.2'].map((v) => v + ' <texto>');
-handler.tags = ['downloader'];
 handler.command = ['play.1', 'play.2'];
 export default handler;
 
