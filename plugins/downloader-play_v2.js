@@ -61,7 +61,7 @@ if (enviando) return;
        }
     }
 
-    const dataMessage = `_*< DESCARGAS - PLAY V2 />*_\n\n▢ *العنوان🔄:* ${data.resultado.title}\n\n▢ *تاريخ لاصدار📜:* ${data.resultado.publicDate}\n\n▢ *القناة📺:* ${data.resultado.channel}\n\n▢ *Vídeo URL:* ${data.resultado.url}`;
+    const dataMessage = `_*< DESCARGAS - PLAY V2 />*_\n\n▢ *العنوان🔄:* ${data.resultado.title}\n\n▢ *تاريخ لاصدار📜:* ${data.resultado.publicDate}\n\n▢ *القناة📺:* ${data.resultado.channel}\n\n▢ *رابط المقطع⛓️:* ${data.resultado.url}`;
     await conn.sendMessage(m.chat, { text: dataMessage }, { quoted: m });
 
     if (buff) {
