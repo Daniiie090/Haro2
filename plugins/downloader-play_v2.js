@@ -6,7 +6,7 @@ let fileName;
 let apiUrl;
 let enviando = false;
 const handler = async (m, { command, usedPrefix, conn, text }) => {
-  if (!text) throw `_*< DESCARGAS - PLAY v2 />*_\n\n*[ ℹ️ ] Hace falta el título del video de YouTube.*\n\n*[ 💡 ] Ejemplo:* _${usedPrefix + command} Good Feeling - Flo Rida_\n\n*[ 💡 ] Ejemplo 2:* _${usedPrefix + command} https://youtu.be/JLWRZ8eWyZo?si=EmeS9fJvS_OkDk7p_`;
+  if (!text) throw `_*< DESCARGAS - PLAY v2 />*_\n\n*[ ℹ️ ] ضع عنوان أو رابط مقطع اليوتيوب الذي تريد البحث عنه.*\n\n*[ 💡 ] مثال:* _${usedPrefix + command} ETA - NEW JEANS _\n\n*[ 💡 ] مثال 2:* _${usedPrefix + command} https://youtube.com/shorts/3ZAHgVkCbYM?si=lvME0TxEfLkX02-M`;
 if (enviando) return;
     enviando = true
   try {
