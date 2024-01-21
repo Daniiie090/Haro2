@@ -68,7 +68,7 @@ function start(file) {
       process.exit();
     }
   });
-  const opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse());
+  const port = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse());
   if (!opts['test']) {
     if (!rl.listenerCount()) {
       rl.on('line', (line) => {
