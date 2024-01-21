@@ -61,7 +61,7 @@ if (enviando) return;
        }
     }
 
-    const dataMessage = `_*< DESCARGAS - PLAY V2 />*_\n\n▢ *Título:* ${data.resultado.title}\n\n▢ *Publicado:* ${data.resultado.publicDate}\n\n▢ *Canal:* ${data.resultado.channel}\n\n▢ *Vídeo URL:* ${data.resultado.url}`;
+    const dataMessage = `_*< DESCARGAS - PLAY V2 />*_\n\n▢ *العنوان🔄:* ${data.resultado.title}\n\n▢ *تاريخ لاصدار📜:* ${data.resultado.publicDate}\n\n▢ *القناة📺:* ${data.resultado.channel}\n\n▢ *Vídeo URL:* ${data.resultado.url}`;
     await conn.sendMessage(m.chat, { text: dataMessage }, { quoted: m });
 
     if (buff) {
@@ -76,7 +76,7 @@ if (enviando) return;
     throw `_*< DESCARGAS - PLAY V2 />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
   }
 };
-handler.command = ['play1', 'play.2'];
+handler.command = ['play.1', 'play.2'];
 export default handler;
 
 
