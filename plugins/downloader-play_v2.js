@@ -6,7 +6,7 @@ let fileName;
 let apiUrl;
 let enviando = false;
 const handler = async (m, { command, usedPrefix, conn, text }) => {
-  if (!text) throw `_*< DESCARGAS - PLAY v2 />*_\n\n*[ ℹ️ ] ضع عنوان أو رابط مقطع اليوتيوب الذي تريد البحث عنه.*\n\n*[ 💡 ] مثال:* _${usedPrefix + command} ETA - NEW JEANS _\n\n*[ 💡 ] مثال 2:* _${usedPrefix + command} https://youtube.com/shorts/3ZAHgVkCbYM?si=lvME0TxEfLkX02-M`;
+  if (!text) throw `_*< تحميل من اليوتيوب - الإصدار رقم 2 />*_\n\n*[ ℹ️ ] ضع عنوان أو رابط مقطع اليوتيوب الذي تريد البحث عنه.*\n\n*[ 💡 ] مثال:* _${usedPrefix + command} ETA - NEW JEANS _\n\n*[ 💡 ] مثال 2:* _${usedPrefix + command} https://youtube.com/shorts/3ZAHgVkCbYM?si=lvME0TxEfLkX02-M`;
 if (enviando) return;
     enviando = true
   try {
@@ -27,7 +27,7 @@ if (enviando) return;
 
     if (!data.resultado || !data.resultado.url) {
       enviando = false;
-      throw `_*< DESCARGAS - PLAY V2 />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
+      throw `_*< التحميل من يوتيوب - الإصدار الثاني />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
     } else {
       try {
         if (command === 'play.1') {
@@ -56,12 +56,12 @@ if (enviando) return;
             }
           } catch {
             enviando = false;
-            throw `_*< DESCARGAS - PLAY V2 />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
+            throw `_*< التحميل من اليوتيوب- الإصدار الثاني />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
           }
        }
     }
 
-    const dataMessage = `_*< DESCARGAS - PLAY V2 />*_\n\n▢ *العنوان🔄:* ${data.resultado.title}\n\n▢ *تاريخ لاصدار📜:* ${data.resultado.publicDate}\n\n▢ *القناة📺:* ${data.resultado.channel}\n\n▢ *رابط المقطع⛓️:* ${data.resultado.url}`;
+    const dataMessage = `_*< التحميل من اليوتيوب- الإصدار الثاني/>*_\n\n▢ *العنوان🔄:* ${data.resultado.title}\n\n▢ *تاريخ لاصدار📜:* ${data.resultado.publicDate}\n\n▢ *القناة📺:* ${data.resultado.channel}\n\n▢ *رابط المقطع⛓️:* ${data.resultado.url}`;
     await conn.sendMessage(m.chat, { text: dataMessage }, { quoted: m });
 
     if (buff) {
