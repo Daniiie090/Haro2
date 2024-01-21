@@ -76,7 +76,7 @@ if (enviando) return;
     throw `_*< DESCARGAS - PLAY V2 />*_\n\n*[ ℹ️ ] Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
   }
 };
-handler.command = ['play.1', 'play.2'];
+handler.command = ['play1', 'play.2'];
 export default handler;
 
 
