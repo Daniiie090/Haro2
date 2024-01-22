@@ -13,7 +13,7 @@ let handler = async (m, { args, usedPrefix, command }) => {
 }
 handler.help = ['asmaulhusna [1-99]']
 handler.tags = ['quran']
-handler.command = ['اسماء الله']
+handler.command = ['اسماء']
 
 export default handler
 global.asmaulhusna = [
