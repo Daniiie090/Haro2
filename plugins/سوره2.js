@@ -1,7 +1,5 @@
 import { quran } from '@quranjs/api';
 
-quran.v4.chapters.findAll().then(console.log); // will log all chapters
-
 let handler = async (m, { args, usedPrefix, command }) => {
     if (!(args[0] || args[1])) throw `✳️ البحث عن أي آية في القرآن بالصوت والقراءة:\n${usedPrefix + command} 1 2\n\n يقوم الامر بختصار على البحث عن الاية التي تكتب رقمها أو يرسلها مع مقطع صوتي يقرأ الآية `
     if (isNaN(args[0]) || isNaN(args[1])) throw `مثال:\n${usedPrefix + command} 1 2\n\n𝙱𝚢 : 𝚑𝚊𝚝𝚖𝚒𝚔𝚞 - 𝚋𝚘𝚝`
