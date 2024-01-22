@@ -1,4 +1,6 @@
-import { alquran } from '@bochilteam/scraper'
+import { quran } from '@quranjs/api';
+
+quran.v4.chapters.findAll().then(console.log); // will log all chapters
 
 let handler = async (m, { args, usedPrefix, command }) => {
     if (!(args[0] || args[1])) throw `✳️ البحث عن أي آية في القرآن بالصوت والقراءة:\n${usedPrefix + command} 1 2\n\n يقوم الامر بختصار على البحث عن الاية التي تكتب رقمها أو يرسلها مع مقطع صوتي يقرأ الآية `
