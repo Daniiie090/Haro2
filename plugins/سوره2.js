@@ -1,21 +1,77 @@
-import { quran } from '@quranjs/api';
+import fetch from 'node-fetch';
 
+let handler = async (m, { text, conn, usedPrefix, command }) => {
+  if (!text && !(m.quoted && m.quoted.text)) {
+    throw `Please provide some text or quote a message to get a response.`;
+  }
 
-let handler = async (m, { args, usedPrefix, command }) => {
-    if (!(args[0] || args[1])) throw `✳️ البحث عن أي آية في القرآن بالصوت والقراءة:\n${usedPrefix + command} 1 2\n\n يقوم الامر بختصار على البحث عن الاية التي تكتب رقمها أو يرسلها مع مقطع صوتي يقرأ الآية `
-    if (isNaN(args[0]) || isNaN(args[1])) throw `مثال:\n${usedPrefix + command} 1 2\n\n𝙱𝚢 : 𝚑𝚊𝚝𝚖𝚒𝚔𝚞 - 𝚋𝚘𝚝`
-    let api = await alquran()
-    let mes = `
-${api[args[0] - 1].ayahs[args[1] - 1].text.ar}
+  if (!text && m.quoted && m.quoted.text) {
+    text = m.quoted.text;
+  }
+
+  try {
+    m.react(rwait)
+    const { key } = await conn.sendMessage(m.chat, {
+      image: { url: 'https://telegra.ph/file/c3f9e4124de1f31c1c6ae.jpg' },
+      caption: 'Thinking....'
+    }, {quoted: m})
+    conn.sendPresenceUpdate('composing', m.chat);
+    const prompt = encodeURIComponent(text);
+
+    const guru1 = `${gurubot}/chatgpt?text=${prompt}`;
     
-${api[args[0] - 1].ayahs[args[1] - 1].translation.en}
-( Q.S ${api[args[0] - 1].asma.en.short} : ${api[args[0] - 1].ayahs[args[1] - 1].number.insurah} )
-`.trim()
-    m.reply(mes)
-    conn.sendFile(m.chat, api[args[0] - 1].ayahs[args[1] - 1].audio.url, '', '', m)
-}
+    try {
+      let response = await fetch(guru1);
+      let data = await response.json();
+      let result = data.result;
 
-handler.help = ['ayta'].map(v => v + ' *surah*')
-handler.tags = ['islam']
-handler.command = /^(ايه|سوره|أية)$/i
-export default handler
+      if (!result) {
+        
+        throw new Error('No valid JSON response from the first API');
+      }
+
+      await conn.relayMessage(m.chat, {
+        protocolMessage: {
+          key,
+          type: 14,
+          editedMessage: {
+            imageMessage: { caption: result }
+          }
+        }
+      }, {});
+      m.react(done);
+    } catch (error) {
+      console.error('Error from the first API:', error);
+
+  
+      const model = 'llama';
+      const senderNumber = m.sender.replace(/[^0-9]/g, ''); 
+      const session = `GURU_BOT_${senderNumber}`;
+      const guru2 = `https://ultimetron.guruapi.tech/gpt3?prompt=${prompt}`;
+      
+      let response = await fetch(guru2);
+      let data = await response.json();
+      let result = data.completion;
+
+      await conn.relayMessage(m.chat, {
+        protocolMessage: {
+          key,
+          type: 14,
+          editedMessage: {
+            imageMessage: { caption: result }
+          }
+        }
+      }, {});
+      m.react(done);
+    }
+
+  } catch (error) {
+    console.error('Error:', error);
+    throw `*ERROR*`;
+  }
+};
+handler.help = ['chatgpt']
+handler.tags = ['AI']
+handler.command = ['bro', 'chatgpt', 'ai', 'gpt'];
+
+export default handler;
