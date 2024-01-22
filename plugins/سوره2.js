@@ -1,77 +1,61 @@
 import fetch from 'node-fetch';
+import translate from '@vitalets/google-translate-api';
 
-let handler = async (m, { text, conn, usedPrefix, command }) => {
-  if (!text && !(m.quoted && m.quoted.text)) {
-    throw `Please provide some text or quote a message to get a response.`;
-  }
-
-  if (!text && m.quoted && m.quoted.text) {
-    text = m.quoted.text;
-  }
-
+let quranSurahHandler = async (m, { conn, usedPrefix, command }) => {
   try {
-    m.react(rwait)
-    const { key } = await conn.sendMessage(m.chat, {
-      image: { url: 'https://telegra.ph/file/c3f9e4124de1f31c1c6ae.jpg' },
-      caption: 'Thinking....'
-    }, {quoted: m})
-    conn.sendPresenceUpdate('composing', m.chat);
-    const prompt = encodeURIComponent(text);
+    let surahInput = m.text.split(' ')[1];
 
-    const guru1 = `${gurubot}/chatgpt?text=${prompt}`;
-    
-    try {
-      let response = await fetch(guru1);
-      let data = await response.json();
-      let result = data.result;
-
-      if (!result) {
-        
-        throw new Error('No valid JSON response from the first API');
-      }
-
-      await conn.relayMessage(m.chat, {
-        protocolMessage: {
-          key,
-          type: 14,
-          editedMessage: {
-            imageMessage: { caption: result }
-          }
-        }
-      }, {});
-      m.react(done);
-    } catch (error) {
-      console.error('Error from the first API:', error);
-
-  
-      const model = 'llama';
-      const senderNumber = m.sender.replace(/[^0-9]/g, ''); 
-      const session = `GURU_BOT_${senderNumber}`;
-      const guru2 = `https://ultimetron.guruapi.tech/gpt3?prompt=${prompt}`;
-      
-      let response = await fetch(guru2);
-      let data = await response.json();
-      let result = data.completion;
-
-      await conn.relayMessage(m.chat, {
-        protocolMessage: {
-          key,
-          type: 14,
-          editedMessage: {
-            imageMessage: { caption: result }
-          }
-        }
-      }, {});
-      m.react(done);
+    if (!surahInput) {
+      throw new Error(`يرجى تحديد رقم السورة\n\n    *${usedPrefix + command}* 1`);
     }
 
+    let surahListRes = await fetch('https://quran-endpoint.vercel.app/quran');
+    let surahList = await surahListRes.json();
+
+    let surahData = surahList.data.find(surah => 
+        surah.number === Number(surahInput) || 
+        surah.asma.ar.short.toLowerCase() === surahInput.toLowerCase() || 
+        surah.asma.en.short.toLowerCase() === surahInput.toLowerCase()
+    );
+
+    if (!surahData) {
+      throw new Error(`تعذر العثور على سورة برقم أو اسم "${surahInput}"`);
+    }
+
+    let res = await fetch(`https://quran-endpoint.vercel.app/quran/${surahData.number}`);
+    
+    if (!res.ok) {
+      let error = await res.json(); 
+      throw new Error(`فشل طلب واجهة برمجة التطبيقات بالحالة ${res.status} والرسالة ${error.message}`);
+    }
+
+    let json = await res.json();
+
+
+    // Translate tafsir from Bahasa Indonesia to AR
+    let translatedTafsirar = await translate(json.data.tafsir.id, { to: 'ar', autoCorrect: true });
+
+    let quranSurah = `
+🕌 *القرآن: الكتاب المقدس*\n
+📜 *سورة ${json.data.number}: ${json.data.asma.ar.long}*\n
+النوع: ${json.data.type.ar}\n
+عدد الآيات: ${json.data.ayahCount}\n
+🔮 *التوضيح (عربي):*\n
+${translatedTafsirar.text}`;
+
+    m.reply(quranSurah);
+
+    if (json.data.recitation.full) {
+      conn.sendFile(m.chat, json.data.recitation.full, 'quran.mp3', null, m, true, { type: 'audioMessage', ptt: true });
+    }
   } catch (error) {
-    console.error('Error:', error);
-    throw `*ERROR*`;
+    console.error(error);
+    m.reply(`خطأ: ${error.message}`);
   }
 };
-handler.help = ['chatgpt']
-handler.tags = ['AI']
-handler.command = ['bro', 'chatgpt', 'ai', 'gpt'];
 
-export default handler;
+quranSurahHandler.help = ['quran [surah_number|surah_name]'];
+quranSurahHandler.tags = ['quran', 'surah'];
+quranSurahHandler.command = ['quran', 'surah','القران','قران','القرآن','قرآن']
+
+export default quranSurahHandler;
