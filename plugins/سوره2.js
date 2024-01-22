@@ -16,5 +16,5 @@ ${api[args[0] - 1].ayahs[args[1] - 1].translation.en}
 
 handler.help = ['ayta'].map(v => v + ' *surah*')
 handler.tags = ['islam']
-handler.command = /^(ايه|ایه|آيه|أية)$/i
+handler.command = /^(ايه|سوره|أية)$/i
 export default handler
