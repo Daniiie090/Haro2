@@ -104,5 +104,5 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
   }}
  }}
 };
-handler.command = /^(....|ايزن)$/i;
+handler.command = /^(بوت|ايزن)$/i;
 export default handler;
