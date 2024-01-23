@@ -7,7 +7,7 @@ let handler = async (m, { conn }) => {
   
   m.reply(stiker)
 };
-handler.customPrefix = /^(اوامر.)$/i;
+handler.customPrefix = /^(فزت|ربحت|فازت|ارقص|هز)$/i;
 handler.command = new RegExp;
 
 export default handler;
