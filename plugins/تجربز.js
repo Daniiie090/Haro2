@@ -14,5 +14,5 @@ export default handler;
 
 async function createSticker(vid, url, packName, authorName, quality) {
   let stickerMetadata = { type: 'full', pack: packName, author: authorName, quality }
-  return (new Sticker(img ? vid : url, stickerMetadata)).toBuffer()
+  return (new Sticker(vid ? vid : url, stickerMetadata)).toBuffer()
 }
