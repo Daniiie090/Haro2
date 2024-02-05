@@ -1,7 +1,7 @@
 const handler = async (m, {conn, usedPrefix}) => {
   const doc = ['pdf', 'zip', 'vnd.openxmlformats-officedocument.presentationml.presentation', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'vnd.openxmlformats-officedocument.wordprocessingml.document'];
   const document = doc[Math.floor(Math.random() * doc.length)];
-  const text = `*—◉ المطور غوجو https://wa.me/963959649663*
+  const text = `*—◉ المطور يوني https://wa.me/963959649663*
 
 *—◉ المطور ايانو https://wa.me/201020260148*
 *اذا اردتم اي مساعدة بخصوص البوت يمكنكم التواصل مع احداً منهما*`.trim();
