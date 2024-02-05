@@ -18,5 +18,5 @@ await m.reply('*[❗] تم إرسال ارتباط مجموعتك إلى الم�
 
 handler.help = ['join [chat.whatsapp.com]']
 handler.tags = ['premium']
-handler.command = /^join|انضم$/i
+handler.command = /^join|جوين$/i
 export default handler
