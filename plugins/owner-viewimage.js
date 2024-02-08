@@ -11,7 +11,7 @@ let handler = async (m, { text }) => {
 
 handler.help = ['viewimage <nome>'];
 handler.tags = ['tools'];
-handler.command = /^(viewimage|vi)$/i;
+handler.command = /^(عرض|vi)$/i;
 handler.owner = true;
 
 export default handler;
