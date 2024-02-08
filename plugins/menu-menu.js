@@ -7,7 +7,7 @@ const dir = [
 let handler = async (m, { conn }) => {
     const name = conn.getName(m.sender);
     const videoUrl = pickRandom(dir);
-    const tagUser = '@' + m.sender.split("@s.whatsapp.net")[0];
+    const taguser = '@' + m.sender.split("@s.whatsapp.net")[0];
     const more = String.fromCharCode(8206);
     const teks = `${pickRandom([`╭═══〘 ✯✯✯✯✯✯✯✯✯ ═●▬▬▬ஜƸ̵̡⁠Ӝ̵̨̄⁠Ʒஜ▬▬▬●
 *❘╼╼𓏪 قائـمـة 📜 الاوامـر 𓏪╾╾❘*
