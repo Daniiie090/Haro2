@@ -350,16 +350,7 @@ global.reloadHandler = async function(restatConn) {
     conn.ev.off('connection.update', conn.connectionUpdate);
     conn.ev.off('creds.update', conn.credsUpdate);
   }
-
-  conn.welcome = '*╔══════════════*\n*╟❧ @subject*\n*╠══════════════*\n*╟❧ @user*\n*╟❧ انضم شخص جديد فل تستمتع او لا غير مهم* \n*║*\n*╟❧ الوصف اقرأه او لا غير مهم:*\n\n@desc\n\n*║*\n*╟❧ !!*\n*╚══════════════*';
-  conn.bye = '*╔══════════════*\n*╟❧ @user*\n*╟❧ 🟢ياله من احمق🟢 * \n*╚══════════════*';
-  conn.spromote = '*@user اصبح مشرف للمجموعة!!*';
-  conn.sdemote = '*@user توقعت انك سيء ولكن ليس لهذه الدرجة!!*';
-  conn.sDesc = '*تم تغير وصف المجموعة*\n\n*الوصف الجديد:* @desc';
-  conn.sSubject = '*تم تغير اسم المجموعة *\n*الاسم الجديد:* @subject';
-  conn.sIcon = '*تم تغير صورة المجموعة!!*';
-  conn.sRevoke = '*تمت اعادة تعيين رابط المجموعة!*\n*الرابط:* @revoke';
-
+  
   conn.handler = handler.handler.bind(global.conn);
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn);
   conn.groupsUpdate = handler.groupsUpdate.bind(global.conn);
