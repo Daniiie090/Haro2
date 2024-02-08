@@ -61,9 +61,9 @@ export async function before(m, {conn, participants}) {
   if (chat.detect2 && m.messageStubType == 32) {
     let ax;
     if (m.messageStubParameters[0] === m.sender) {
-      ax = 'انضم';
+      ax = 'salido';
     } else {
-      ax = 'غادر';
+      ax = 'eliminado';
     }
     let txt5 = `*لقد 💠 ${ax} عضو مؤخرا💠.*\n\n`;
     txt5 += `*◦  المجموعة:* ${groupName}\n`;
@@ -79,9 +79,9 @@ export async function before(m, {conn, participants}) {
   if (chat.detect2 && m.messageStubType == 26) {
     let accion;
     if (m.messageStubParameters[0].split`@`[0] === 'on') {
-      accion = 'مغلق';
+      accion = 'cerrado';
     } else {
-      accion = 'مفتوح';
+      accion = 'abierto';
     }
     let txt6 = `*💠لقد تم مؤخرا تعديل اعدادات المجموعة💠.*\n\n`;
     txt6 += `*◦  المجموعة:* ${groupName}\n`;
