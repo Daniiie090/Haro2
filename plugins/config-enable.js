@@ -376,7 +376,7 @@ const handler = async (m, {conn, usedPrefix, command, args, isOwner, isAdmin, is
       isAll = true;
       if (!isROwner) {
         global.dfail('rowner', m, conn);
-        throw false;
+        throw true;
       }
       bot.antispam = isEnable;
       break;
@@ -384,7 +384,7 @@ const handler = async (m, {conn, usedPrefix, command, args, isOwner, isAdmin, is
       if (m.isGroup) {
         if (!(isAdmin || isOwner)) {
           global.dfail('admin', m, conn);
-          throw false;
+          throw true;
         }
       }
       chat.antiToxic = isEnable;
