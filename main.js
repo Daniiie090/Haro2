@@ -350,7 +350,16 @@ global.reloadHandler = async function(restatConn) {
     conn.ev.off('connection.update', conn.connectionUpdate);
     conn.ev.off('creds.update', conn.credsUpdate);
   }
-  
+
+  conn.welcome = '*╔══════════════*\n*╟❧ @subject*\n*╠══════════════*\n*╟❧ @user*\n*╟❧ انضم شخص جديد فل تستمتع او لا غير مهم* \n*║*\n*╟❧ الوصف اقرأه او لا غير مهم:*\n\n@desc\n\n*║*\n*╟❧ !!*\n*╚══════════════*';
+  conn.bye = '*╔══════════════*\n*╟❧ @user*\n*╟❧ 🟢ياله من احمق🟢 * \n*╚══════════════*';
+  conn.spromote = '*@user اصبح مشرف للمجموعة!!*';
+  conn.sdemote = '*@user توقعت انك سيء ولكن ليس لهذه الدرجة!!*';
+  conn.sDesc = '*تم تغير وصف المجموعة*\n\n*الوصف الجديد:* @desc';
+  conn.sSubject = '*تم تغير اسم المجموعة *\n*الاسم الجديد:* @subject';
+  conn.sIcon = '*تم تغير صورة المجموعة!!*';
+  conn.sRevoke = '*تمت اعادة تعيين رابط المجموعة!*\n*الرابط:* @revoke';
+
   conn.handler = handler.handler.bind(global.conn);
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn);
   conn.groupsUpdate = handler.groupsUpdate.bind(global.conn);
@@ -503,7 +512,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `🤖 وقت تشغيل البوت: ${uptime} ┃ 👑 By gogo (HARO)`;
+  const bio = `🤖 ᴛɪᴇᴍᴘᴏ ᴀᴄᴛɪᴠᴏ: ${uptime} ┃ 👑 ʙʏ ʙʀᴜɴᴏ sᴏʙʀɪɴᴏ ┃ 🔗 ᴄᴜᴇɴᴛᴀs ᴏғᴄ: https://www.atom.bio/theshadowbrokers-team`;
   await conn.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
@@ -511,6 +520,6 @@ function clockString(ms) {
   const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24;
   const m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60;
   const s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60;
-  return [d, ' يوم ️', h, ' ساعة ', m, ' دقيقة ', s, ' ثانية '].map((v) => v.toString().padStart(2, 0)).join('');
+  return [d, ' Día(s) ️', h, ' Hora(s) ', m, ' Minuto(s) ', s, ' Segundo(s) '].map((v) => v.toString().padStart(2, 0)).join('');
 }
 _quickTest().catch(console.error);
