@@ -11,9 +11,9 @@ let wib = moment.tz('Egypt').format('HH:mm:ss')
 //import db from '../lib/database.js'
 
 const dir = [
-    'https://telegra.ph/file/9274850cb546d86b98c9f.mp4',
-    'https://telegra.ph/file/07f90949b124189139241.mp4',
-    'https://telegra.ph/file/024a664c578806c019b8c.mp4',
+    'https://telegra.ph/file/c2e6086f2bf315ec67f05.mp4',
+    'https://telegra.ph/file/d88cde56e111efbe8ecf4.mp4',
+    'https://telegra.ph/file/a8fce1e4a3cca0120d698.mp4',
 ];
 
 let handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
