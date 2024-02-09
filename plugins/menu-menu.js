@@ -18,7 +18,7 @@ if (!(who in global.db.data.users)) throw `✳️ The user is not found in my da
   const {money, joincount} = global.db.data.users[m.sender];
   const {exp, limit, level, role} = 
     global.db.data.users[m.sender];
-let { min, xp, max } = xpRange(user.level, global.multiplier)
+let { min, xp, max } = xprange(user.level, global.multiplier)
 let username = conn.getName(who)
 let math = max - xp
 let sn = createHash('md5').update(who).digest('hex')
@@ -371,4 +371,4 @@ function clockString(ms) {
         res = "مساء الخير 🌙"
       }
       return res
-    }
+      }
