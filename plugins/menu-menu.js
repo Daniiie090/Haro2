@@ -16,7 +16,7 @@ const dir = [
     'https://telegra.ph/file/024a664c578806c019b8c.mp4',
 ];
 
-let handler = async (m, { conn }) => {
+let handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
     let d = new Date(new Date + 3600000)
     let locale = 'ar'
     let week = d.toLocaleDateString(locale, { weekday: 'long' })
