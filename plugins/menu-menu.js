@@ -12,7 +12,7 @@ let wib = moment.tz('Egypt').format('HH:mm:ss')
 
 const dir = [
     'https://telegra.ph/file/c2e6086f2bf315ec67f05.mp4',
-    'https://telegra.ph/file/d88cde56e111efbe8ecf4.mp4',
+    'https://telegra.ph/file/ef0781fd1b90d1a1b8205.mp4',
     'https://telegra.ph/file/a8fce1e4a3cca0120d698.mp4',
 ];
 
