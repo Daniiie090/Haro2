@@ -1,3 +1,15 @@
+import { createHash } from 'crypto'
+import { canLevelUp, xpRange } from '../lib/levelling.js'
+import fetch from 'node-fetch'
+import fs from 'fs'
+const { levelling } = '../lib/levelling.js'
+import moment from 'moment-timezone'
+import { promises } from 'fs'
+import { join } from 'path'
+const time = moment.tz('Egypt').format('HH')
+let wib = moment.tz('Egypt').format('HH:mm:ss')
+//import db from '../lib/database.js'
+
 const dir = [
     'https://telegra.ph/file/9274850cb546d86b98c9f.mp4',
     'https://telegra.ph/file/07f90949b124189139241.mp4',
@@ -95,7 +107,7 @@ let readMore = more.repeat(900)
 *⏎* سرقة ملصق بحقوقك
 *✎╎♻️ ⇠〘 .لصوره 〙*    
 *⏎* تحويل الملصق لصورة
-*✎╎🎞️ ⇠〘 .لفديو 〙*    
+*✎╎🎞️ ⇠〘 .لفديو 〙*    يك
 *⏎* تحويل الملصق المتحرك لفيديو
 *✎╎📩 ⇠〘 .تليجراف 〙*    
 *⏎* رفع الصور و الفديوهات الى تليجراف
@@ -120,7 +132,7 @@ let readMore = more.repeat(900)
 *⏎*يحملك فيديوهات من الانستا
 *✎╎🎶 ⇠〘.play2〙*
 *⏎* تحميل اي مقطع يوتيوب بل اسم بسرعة
-*✎╎🎶 ⇠〘.play〙*
+*✎╎🎶 ⇠〘.play〙*ق
 *⏎*يحملك اي اغنيه من يوتيوب بل اسم بسرعة ودقة
 *✎╎🎶 ⇠〘سبوت 〙*
 *⏎*ا امر خاص بتحميل من سبوتيفاي
