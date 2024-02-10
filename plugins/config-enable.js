@@ -368,7 +368,7 @@ const handler = async (m, {conn, usedPrefix, command, args, isOwner, isAdmin, is
       isAll = true;
       if (!isROwner) {
         global.dfail('rowner', m, conn);
-        throw true;
+        throw false;
       }
       bot.modejadibot = isEnable;
       break;
