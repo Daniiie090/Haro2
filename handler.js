@@ -943,7 +943,7 @@ export async function handler(chatUpdate) {
         if (!('modohorny' in chat)) chat.modohorny = false;
         if (!('autosticker' in chat)) chat.autosticker = false;
         if (!('audios' in chat)) chat.audios = false;
-        if (!('antiLink' in chat)) chat.antiLink = true;
+        if (!('antiLink' in chat)) chat.antiLink = false;
         if (!('antiLink2' in chat)) chat.antiLink2 = false;
         if (!('antiviewonce' in chat)) chat.antiviewonce = false;
         if (!('antiToxic' in chat)) chat.antiToxic = true;
@@ -968,7 +968,7 @@ export async function handler(chatUpdate) {
           modohorny: true,
           autosticker: false,
           audios: true,
-          antiLink: true,
+          antiLink: false,
           antiLink2: false,
           antiviewonce: true,
           antiToxic: true,
