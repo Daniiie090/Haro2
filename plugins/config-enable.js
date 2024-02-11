@@ -229,7 +229,7 @@ const handler = async (m, {conn, usedPrefix, command, args, isOwner, isAdmin, is
       if (m.isGroup) {
         if (!(isAdmin || isOwner)) {
           global.dfail('admin', m, conn);
-          throw false;
+          throw true;
         }
       }
       chat.antiLink = isEnable;
