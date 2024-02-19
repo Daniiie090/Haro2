@@ -1,49 +1,116 @@
-import ws from 'ws';
-async function handler(m, { conn: _envio, usedPrefix }) {
-  const users = [...new Set([...global.conns.filter((conn) => conn.user && conn.ws.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
-  function convertirMsADiasHorasMinutosSegundos(ms) {
-  var segundos = Math.floor(ms / 1000);
-  var minutos = Math.floor(segundos / 60);
-  var horas = Math.floor(minutos / 60);
-  var días = Math.floor(horas / 24);
+import { createHash } from 'crypto'
+import { canLevelUp, xpRange } from '../lib/levelling.js'
+import fetch from 'node-fetch'
+import fs from 'fs'
+const { levelling } = '../lib/levelling.js'
+import moment from 'moment-timezone'
+import { promises } from 'fs'
+import { join } from 'path'
+const time = moment.tz('Egypt').format('HH')
+let wib = moment.tz('Egypt').format('HH:mm:ss')
+//import db from '../lib/database.js'
 
-  segundos %= 60;
-  minutos %= 60;
-  horas %= 24;
+const dir = [
+    
+    'https://telegra.ph/file/d04a388ec5f24fe590618.mp4 ',
+];
 
-  var resultado = "";
-  if (días !== 0) {
-    resultado += días + " días, ";
-  }
-  if (horas !== 0) {
-    resultado += horas + " horas, ";
-  }
-  if (minutos !== 0) {
-    resultado += minutos + " minutos, ";
-  }
-  if (segundos !== 0) {
-    resultado += segundos + " segundos";
-  }
+let handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
+    let d = new Date(new Date + 3600000)
+    let locale = 'ar'
+    let week = d.toLocaleDateString(locale, { weekday: 'long' })
+    let date = d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
+    let _uptime = process.uptime() * 1000
+    let uptime = clockString(_uptime)
+let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
+if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`
+    const videoUrl = pickRandom(dir);
+    const user = global.db.data.users[m.sender];
+  const {money, joincount} = global.db.data.users[m.sender];
+  const {exp, limit, level, role} = 
+    global.db.data.users[m.sender];
+let { min, xp, max } = xpRange(user.level, global.multiplier)
+let username = conn.getName(who)
+let math = max - xp
+let sn = createHash('md5').update(who).digest('hex')
+let totalreg = Object.keys(global.db.data.users).length;
+let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length 
+let more = String.fromCharCode(8206)
+let readMore = more.repeat(900) 
+  const taguser = '@' +  m.sender.split('@s.whatsapp.net')[0];
+    const teks = `${pickRandom([`╭═══〘 ✯✯✯✯✯✯✯✯✯ ═●▬▬▬ஜƸ̵̡⁠Ӝ̵̨̄⁠Ʒஜ▬▬▬●
+     *˼‏🔃˹ قـسـم الـتحميلات╿↶*
+━ ── • ⟐ • ── ━
+*✎╎🎦 ⇠〘 .تيك 〙*    
+*⏎* ينزل فيديو من التيك توك بدون علامة مائية
+*✎╎🎞️ ⇠〘 .فيديو 〙*    
+*⏎* يحمل اي فيديو يوتيوب
+*✎╎🎥⇠〘 .سبوت 〙*
+*✎ للتحميل من سبوتيفاي
+*✎╎🍥 ⇠〘 .انستا 〙*    
+*⏎*يحملك فيديوهات من الانستا
+*✎╎🎶 ⇠〘.play2〙*
+*⏎* تحميل اي مقطع يوتيوب بل اسم بسرعة
+*✎╎🎶 ⇠〘.play〙*
+*⏎*يحملك اي اغنيه من يوتيوب بل اسم بسرعة ودقة
+*✎╎🎶 ⇠〘.play.2  〙*
+*⏎*الامر خاص بتحميل من يوتيوب عن طريق رابط او اسم والرقم واحد بدل اثنان لتحميل صوت بدل مقطع
+*✎╎🎶 ⇠〘.yta2〙*
+*⏎*هذا لامر للتحميل من يوتيوب على شكل مستند بدقة عالية
+*✎╎🎶 ⇠〘.yta〙*
+*⏎*امر بديل للتحميل على شكل صوت من يوتيوب عن طريق الرابط
+*✎╎🎶 ⇠〘.ytv〙*
+*⏎* خاص للتحميل من يوتيوب عن طريق رابط على شكل فيديو
+*✎╎🎶 ⇠〘.يوتب〙*
+*⏎*هذا لامر خاص في بحث اليوتيوب
+*✎╎⬇️ ⇠〘 .تطبيق  〙*    
+*⏎*يحمل برامج APK
+*✎╎🖼️ ⇠〘 .صور 〙*    
+*⏎*يحمل صور من تيك توك عن طريق لنك 
+*✎╎🎶 ⇠〘.تويت〙*
+*⏎* خاص بتحميل من تويتر
+*✎╎🎶 ⇠〘.غوغل〙*
+*⏎*
+ ╰⋅ ⋅ ── ⋅ ⋅ ── ✩ ── ⋅ ⋅ ── ⋅ ⋅ ╯
 
-  return resultado;
-}
+*~.¸¸ ❝ yone bot❝ ¸¸.~*`])}`.trim();
 
-  const message = users.map((v, index) => `*${index + 1}.-* @${v.user.jid.replace(/[^0-9]/g, '')}\n*Link:* wa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${usedPrefix}estado\n*Nombre:* ${v.user.name || '-'}\n*Uptime:* ${ v.uptime ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime) : "Desconocido"}`).join('\n\n');
-  const replyMessage = message.length === 0 ? '*—◉ No hay SubBots activos en estos momentos.*' : message;
-  const totalUsers = users.length;
-  const responseMessage = `
-*—◉ 𝙰𝚀𝚄𝙸 𝚃𝙸𝙴𝙽𝙴𝚂 𝙻𝙰 𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝚂𝚄𝙱𝙱𝙾𝚃𝚂 (𝚂𝙴𝚁𝙱𝙾𝚃/𝙹𝙰𝙳𝙸𝙱𝙾𝚃) 𝙰𝙲𝚃𝙸𝚅𝙾𝚂 🤖️*
+    conn.sendMessage(m.chat, {
+        video: { url: videoUrl },
+        caption: teks,
+        gifPlayback: true,
+        gifAttribution: 0
+    }, { quoted: m });
+};
 
-*◉ 𝙿𝚄𝙴𝙳𝙴𝚂 𝙲𝙾𝙽𝚃𝙰𝙲𝚃𝙰𝚁𝙻𝙾𝚂 𝙿𝙰𝚁𝙰 𝙿𝙴𝙳𝙸𝚁 𝚀𝚄𝙴 𝚂𝙴 𝚄𝙽𝙰𝙽 𝙰 𝚃𝚄 𝙶𝚁𝚄𝙿𝙾, 𝚂𝙴 𝚁𝙴𝚂𝙿𝙴𝚃𝚄𝙾𝚂𝙾!!*
+handler.command = ['م6'];
 
-*[❗] 𝚃𝙷𝙴 𝚂𝙷𝙰𝙳𝙾𝚆 𝙱𝚁𝙾𝙺𝙴𝚁𝚂 - 𝚃𝙴𝙰𝙼 𝚂𝙴 𝙳𝙴𝚂𝙻𝙸𝙽𝙳𝙰 𝙳𝙴 𝚃𝙾𝙳𝙰 𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙰𝙱𝙸𝙻𝙸𝙳𝙰𝙳 𝙾 𝚂𝚄𝙲𝙴𝚂𝙾 𝙾𝙲𝚄𝚁𝚁𝙸𝙳𝙾 𝙲𝙾𝙽 𝚁𝙴𝚂𝙿𝙴𝙲𝚃𝙾 𝙰𝙻 𝙱𝙾𝚃 𝙾 𝚂𝚄𝙱𝙱𝙾𝚃𝚂*
-
-*—◉ 𝚂𝚄𝙱𝙱𝙾𝚃𝚂 𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙾𝚂:* ${totalUsers || '0'}
-
-${replyMessage.trim()}`.trim();
-
-  await _envio.sendMessage(m.chat, {text: responseMessage, mentions: _envio.parseMention(responseMessage)}, {quoted: m});
-}
-handler.command = handler.help = ['listjadibot', 'bots', 'subsbots'];
-handler.tags = ['jadibot'];
 export default handler;
+
+function pickRandom(list) {
+    return list[Math.floor(Math.random() * list.length)];
+}
+
+function clockString(ms) {
+    let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
+    let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
+    let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
+    return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')}
+
+    function ucapan() {
+      const time = moment.tz('Egypt').format('HH')
+      let res = "بداية يوم سعيده ☀️"
+      if (time >= 4) {
+        res = "صباح الخير 🌄"
+      }
+      if (time >= 10) {
+        res = "مساء الخير ☀️"
+      }
+      if (time >= 15) {
+        res = "مساء الخير 🌇"
+      }
+      if (time >= 18) {
+        res = "مساء الخير 🌙"
+      }
+      return res
+    }
