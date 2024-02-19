@@ -42,8 +42,8 @@ const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, is
 *🎶✬⃝╎اوامــر الـتحـويـل  .م2 *
 *🎶✬⃝╎اوامــر الـذكــاء الاصتناعي  .م3 *
 *🎶✬⃝╎اوامــر الــتـرفـيـه  .م4 *
-*🎶✬⃝ اوامــر الـبــحـث م5
-
+*🎶✬⃝╎اوامــر الاعضاء    م5
+*🎶✬⃝╎اوامــر التحميلات  .م6
 *˼‏ ⚠️˹ مـلاحــظــة╿↶*
 ╭ ⋅ ⋅ ── ⋅ ⋅ ── ✩ ── ⋅ ⋅ ── ⋅ ⋅ ╮
 *❶ - يمنع منعا بتا سب البوت.*
@@ -68,7 +68,7 @@ conn.sendFile(m.chat, 'https://file.io/vT8PSQr6XBV7', 'sticker.webp', '', m, { a
 
 }; 
 
-handler.command = /^(menu|a|memu|memú|اوامر|info|comandos|allmenu|menu1.2|ayuda|commands|commandos|cmd)$/i;
+handler.command = /^(menu|a|مهام|memú|اوامر|info|comandos|allmenu|menu1.2|ayuda|commands|commandos|cmd)$/i;
 handler.exp = 50;
 handler.fail = null;
 export default handler;
