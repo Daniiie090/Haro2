@@ -5,7 +5,7 @@ let handler = async (m, { conn }) => {
 
     let image = 'https://telegra.ph/file/8ed77669c518ee5d4ed92.png'
 
-    conn.sendFile(m.chat, image, 'image.png', `Hello ${taguser} Need help?  type /help `, m)
+    conn.sendFile(m.chat, image, 'image.png', `اهلا صديقي ${taguser} تحتاج مساعدة?  اكتب.اوامر`, m)
 }
 
 handler.customPrefix = /^(بوت|ياسو)$/i
