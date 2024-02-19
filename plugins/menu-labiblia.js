@@ -10,11 +10,7 @@ const time = moment.tz('Egypt').format('HH')
 let wib = moment.tz('Egypt').format('HH:mm:ss')
 //import db from '../lib/database.js'
 
-const dir = [
-    'https://telegra.ph/file/c2e6086f2bf315ec67f05.mp4',
-    'https://telegra.ph/file/ef0781fd1b90d1a1b8205.mp4',
-    'https://telegra.ph/file/c49f3920d84501135fe1b.mp4',
-];
+const dir = ['https://telegra.ph/file/c49f3920d84501135fe1b.mp4',];
 
 let handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
     let d = new Date(new Date + 3600000)
