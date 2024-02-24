@@ -1,10 +1,13 @@
-import fetch from 'node-fetch';
-const handler = async (m, {conn, args, text}) => {
-  if (!text) throw '*[❗𝐈𝐍𝐅𝐎❗] 𝙸𝙽𝙶𝚁𝙴𝚂𝙴 𝙴𝙻 𝙽𝙾𝙼𝙱𝚁𝙴 𝙳𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾 𝙳𝙴 𝚄𝙽 𝚄𝚂𝚄𝙰𝚁𝙸𝙾 𝙳𝙴 𝚃𝙸𝙺𝚃𝙾𝙺*';
-  const res = `https://api.lolhuman.xyz/api/pptiktok/${text}?apikey=${lolkeysapi}`;
-  conn.sendFile(m.chat, res, 'error.jpg', `*[ ✔ ] 𝙰𝚀𝚄𝙸 𝙴𝚂𝚃𝙰 𝙻𝙰 𝙵𝙾𝚃𝙾 𝙳𝙴 𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙴 ${text}*`, m, false);
+const handler = async (m, {conn, text, usedPrefix, command}) => {
+  if (!text) throw `*طريقة التبليغ :*\n\n*مثال :*\n*${usedPrefix + command} رسالتك*`;
+  if (text.length < 10) throw `*البلاغ لازم يكون فيه أكثر من ١٠ حروف!*`;
+  if (text.length > 1000) throw `*الحد الأقصى للبلاغ ١٠٠٠ حرف!*`;
+  const teks = `*❒ بلاغ جديد ❒*\n*≡ صاحب البلاغ :* ${m.sender.split`@`[0]}\n*≡ بلاغه:* *${text}*`;
+  conn.reply('212609395104@s.whatsapp.net', m.quoted ? teks + m.quoted.text : teks, null, {contextInfo: {mentionedJid: [m.sender]}});
+  conn.reply('212703388528@s.whatsapp.net', m.quoted ? teks + m.quoted.text : teks, null, {contextInfo: {mentionedJid: [m.sender]}});
+  m.reply(`*[ ✔️ ] تم ارسال البلاغ*`);
 };
-handler.help = ['tiktokfoto'].map((v) => v + ' <username>');
-handler.tags = ['downloader'];
-handler.command = /^(tiktokfoto|pptiktok)$/i;
+handler.help = ['reporte', 'request'].map((v) => v + ' <teks>');
+handler.tags = ['info'];
+handler.command = /^(بلاغ|تبليغ|خطأ)$/i;
 export default handler;
