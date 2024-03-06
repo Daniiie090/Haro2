@@ -69,7 +69,7 @@ conn.sendFile(m.chat, 'https://file.io/vT8PSQr6XBV7', 'sticker.webp', '', m, { a
 
 }; 
 
-handler.command = /^(menu|a|مهام|memú|اوامر|info|comandos|allmenu|menu1.2|ayuda|commands|commandos|cmd)$/i;
+handler.command = /^(mmm|a|مهام|memú|اوامر|info|comandos|allmenu|menu1.2|ayuda|commands|commandos|cmd)$/i;
 handler.exp = 50;
 handler.fail = null;
 export default handler;
